@@ -1,0 +1,38 @@
+{
+  "name": "spig",
+  "version": "1.0.0",
+  "description": "SPIG is a simple and powerful configuration tool that simplifies the configuration of any NodeJS module.",
+  "main": "./lib/",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fdamken/node-spig.git"
+  },
+  "keywords": [
+    "configuration",
+    "config",
+    "simple",
+    "powerful"
+  ],
+  "author": "Fabian Damken",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/fdamken/node-spig/issues"
+  },
+  "homepage": "https://github.com/fdamken/node-spig#readme",
+  "dependencies": {
+    "extend": "^3.0.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-jslint": "^1.1.14",
+    "grunt-mocha-istanbul": "^5.0.2",
+    "istanbul": "^0.4.4",
+    "mocha": "^3.0.2"
+  }
+}
