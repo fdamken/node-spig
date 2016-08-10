@@ -1,3 +1,10 @@
+[![Build Status](https://travis-ci.org/fdamken/node-spig.svg?branch=master)](https://travis-ci.org/fdamken/node-spig)
+[![Build Status (develop)](https://travis-ci.org/fdamken/node-spig.svg?branch=develop)](https://travis-ci.org/fdamken/node-spig)
+
+
+
+
+
 # SPIG
 
 SPIG is a simple and powerful configuration tool that simplifies the configuration of any NodeJS module.
