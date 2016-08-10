@@ -19,7 +19,7 @@ SPIG is the **simple** and **lightweight** configuration solution for small and 
 You just have to install SPIG to your module:
 
 ```
-npm install spig --save-dev
+npm install spig --save
 ```
 
 
