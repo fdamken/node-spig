@@ -17,7 +17,7 @@
     "simple",
     "powerful"
   ],
-  "author": "Fabian Damken",
+  "author": "Fabian Damken <fabian.damken@gmx.de>",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/fdamken/node-spig/issues"
