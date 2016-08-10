@@ -67,15 +67,22 @@ module.exports = function (grunt) {
                     root: '<%= build.test.root %>'
                 }
             }
+        },
+        coveralls: {
+            upload: {
+                src: 'coverage/lcov.info'
+            }
         }
     });
 
     // Load tasks.
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-coveralls');
     grunt.loadNpmTasks('grunt-mocha-istanbul');
 
     // Build tasks.
-    grunt.registerTask('test', ['jshint', 'mocha_istanbul:coverage']);
+    grunt.registerTask('test-local', ['jshint', 'mocha_istanbul:coverage']);
+    grunt.registerTask('test', ['test-local', 'coveralls:upload']);
 };
 
