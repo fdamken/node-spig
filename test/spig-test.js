@@ -17,31 +17,32 @@
  */
 
 // Constants.
-const MODULE_NAME = require.resolve('../lib/');
+var MODULE_NAME = require.resolve('../lib/');
 // Modules.
-const chai = require('chai');
-const path = require('path');
+var chai = require('chai');
+var path = require('path');
 // Submodules.
-const expect = chai.expect;
+var expect = chai.expect;
 
-const chdir = function(subdir) {
-	process.chdir(path.join(__dirname, subdir));
+var chdir = function (subdir) {
+    /*jslint nomen: true */
+    process.chdir(path.join(__dirname, subdir));
+    /*jslint nomen: false */
 };
 
-const setup = function(subdir) {
-	return function() {
-		delete require.cache[MODULE_NAME];
+var setup = function (subdir) {
+    return function () {
+        delete require.cache[MODULE_NAME];
 
-		chdir(subdir);
-	};
+        chdir(subdir);
+    };
 };
 
-describe('#not-available', function() {
-	before(setup('empty'));
+describe('#not-available', function () {
+    before(setup('empty'));
 
-	it('should throw an error', function() {
-		expect(require.bind(require, MODULE_NAME)).to.throw(/^Unable to read the configuration file/);
-	});
+    it('should throw an error', function () {
+        expect(require.bind(require, MODULE_NAME)).to.throw(/^Unable to read the configuration file/);
+    });
 });
 
-// TODO: Add a lot more test for a test coverage of a thousand percent ;)

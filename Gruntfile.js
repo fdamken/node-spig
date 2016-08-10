@@ -1,5 +1,3 @@
-'use strict';
-
 /*!
  * Copyright 2016 Fabian Damken
  *
@@ -17,78 +15,93 @@
  */
 
 module.exports = function (grunt) {
+    'use strict';
+
     grunt.initConfig({
-        package : grunt.file.readJSON('package.json'),
-        build : {
-            source : {
-                dir : 'lib',
-                mask : '**/*.js'
+        package: grunt.file.readJSON('package.json'),
+        build: {
+            source: {
+                dir: 'lib',
+                mask: '**/*.js'
             },
-            test : {
-                dir : 'test',
-                mask : '**/*.js',
-                root : '/',
-                coverage : {
-                    dir : 'coverage'
+            test: {
+                dir: 'test',
+                mask: '**/*.js',
+                root: '/',
+                coverage: {
+                    dir: 'coverage'
                 }
             },
-            dir : 'dist',
-            outputDir : 'dist/spig'
+            dir: 'dist',
+            outputDir: 'dist/spig'
         },
-        clean : {
-            dist : {
-                files : [{
-                    dot : true,
-                    src : ['<%= build.dir %>']
+        clean: {
+            dist: {
+                files: [{
+                    dot: true,
+                    src: ['<%= build.dir %>']
                 }]
             },
-            test : {
-                files : [{
-                    dot : true,
-                    src : ['<%= build.test.coverage.dir %>']
+            test: {
+                files: [{
+                    dot: true,
+                    src: ['<%= build.test.coverage.dir %>']
                 }]
             }
         },
-        jslint : {
-            lib : {
-                src : '<%= build.source.dir %>/<%= build.source.mask %>',
-                directives : {
-                    node : true
+        jslint: {
+            lib: {
+                src: ['<%= build.source.dir %>/<%= build.source.mask %>'],
+                directives: {
+                    node: true
                 },
-                options : {
-                    jslintXml : '<%= build.dir %>/jslint.xml'
+                options: {
+                    jslintXml: '<%= build.dir %>/jslint.xml'
+                }
+            },
+            test: {
+                src: ['<%= build.test.dir %>/<%= build.test.mask %>'],
+                directives: {
+                    node: true,
+                    predef: ['after', 'afterEach', 'before', 'beforeEach', 'describe', 'it', '__dirname']
+                }
+            },
+            root: {
+                src: '*.js',
+                directives: {
+                    node : true
                 }
             }
         },
-        mocha_istanbul : {
-            coverage : {
-                src : '<%= build.test.dir %>',
-                options : {
-                    mask : '<%= build.test.mask %>',
-                    root : '<%= build.test.root %>'
+        mocha_istanbul: {
+            coverage: {
+                src: '<%= build.test.dir %>',
+                options: {
+                    mask: '<%= build.test.mask %>',
+                    root: '<%= build.test.root %>'
                 }
             }
         },
-        copy : {
-            source : {
-                files : [{
-                    expand : true,
-                    src : '<%= build.source.dir %>/<%= build.source.mask %>',
-                    dest : '<%= build.outputDir %>'
+        copy: {
+            source: {
+                files: [{
+                    expand: true,
+                    src: '<%= build.source.dir %>/<%= build.source.mask %>',
+                    dest: '<%= build.outputDir %>'
                 }]
             },
-            packageJson : {
-                src : 'package.json',
-                dest : '<%= build.outputDir %>/package.json',
-                options : {
-                    process : function (content) {
+            packageJson: {
+                src: 'package.json',
+                dest: '<%= build.outputDir %>/package.json',
+                options: {
+                    process: function (content) {
                         var data = JSON.parse(content);
                         delete data.devDependencies;
                         return JSON.stringify(data, null, 4);
                     }
                 }
             }
-        },
+        }
     });
 
     // Load tasks.
@@ -107,3 +120,4 @@ module.exports = function (grunt) {
     // Default task.
     grunt.registerTask('default', ['build']);
 };
+

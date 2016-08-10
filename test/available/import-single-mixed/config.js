@@ -1,0 +1,15 @@
+module.exports = {
+    $import: 'database',
+    db: {
+        url: 'mysql://localhost/test-db'
+    },
+    messages: {
+        de: {
+            error: 'Ein Fehler ist aufgetreten!'
+        },
+        en: {
+            error: 'An error occurred!'
+        }
+    }
+};
+
