@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/fdamken/node-spig.svg?branch=master)](https://travis-ci.org/fdamken/node-spig)
+[![Build Status (develop)](https://travis-ci.org/fdamken/node-spig.svg?branch=develop)](https://travis-ci.org/fdamken/node-spig)
+[![Coverage Status](https://coveralls.io/repos/github/fdamken/node-spig/badge.svg?branch=develop)](https://coveralls.io/github/fdamken/node-spig?branch=develop)
 
 
 
