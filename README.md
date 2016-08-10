@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/fdamken/node-spig.svg?branch=master)](https://travis-ci.org/fdamken/node-spig)
-[![Build Status (develop)](https://travis-ci.org/fdamken/node-spig.svg?branch=develop)](https://travis-ci.org/fdamken/node-spig)
+Build Status: [![Build Status](https://travis-ci.org/fdamken/node-spig.svg?branch=master)](https://travis-ci.org/fdamken/node-spig)
+Build Status (develop): [![Build Status (develop)](https://travis-ci.org/fdamken/node-spig.svg?branch=develop)](https://travis-ci.org/fdamken/node-spig)
 
 
 
