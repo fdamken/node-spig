@@ -36,12 +36,6 @@ module.exports = function (grunt) {
             outputDir: 'dist/spig'
         },
         clean: {
-            dist: {
-                files: [{
-                    dot: true,
-                    src: ['<%= build.dir %>']
-                }]
-            },
             test: {
                 files: [{
                     dot: true,
@@ -73,44 +67,15 @@ module.exports = function (grunt) {
                     root: '<%= build.test.root %>'
                 }
             }
-        },
-        copy: {
-            source: {
-                files: [{
-                    expand: true,
-                    src: '<%= build.source.dir %>/<%= build.source.mask %>',
-                    dest: '<%= build.outputDir %>'
-                }]
-            },
-            packageJson: {
-                src: 'package.json',
-                dest: '<%= build.outputDir %>/package.json',
-                options: {
-                    process: function (content) {
-                        var data = JSON.parse(content);
-                        delete data.devDependencies;
-                        return JSON.stringify(data, null, 4);
-                    }
-                }
-            }
         }
     });
 
     // Load tasks.
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-mocha-istanbul');
 
     // Build tasks.
-    grunt.registerTask('verify', 'Verifies that the code matches the expected code quality.', ['jshint']);
-    grunt.registerTask('test', ['mocha_istanbul:coverage']);
-
-    // Reactor tasks.
-    grunt.registerTask('qa', ['verify', 'test']);
-    grunt.registerTask('build', ['clean', 'verify', 'test', 'copy']);
-
-    // Default task.
-    grunt.registerTask('default', ['build']);
+    grunt.registerTask('test', ['jshint', 'mocha_istanbul:coverage']);
 };
 

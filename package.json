@@ -4,7 +4,6 @@
   "description": "SPIG is a simple and powerful configuration tool that simplifies the configuration of any NodeJS module.",
   "main": "./lib/",
   "scripts": {
-    "build": "./node_modules/.bin/grunt build",
     "test": "./node_modules/.bin/grunt test"
   },
   "repository": {
@@ -31,7 +30,6 @@
     "decache": "^4.1.0",
     "grunt": "^1.0.1",
     "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-mocha-istanbul": "^5.0.2",
     "istanbul": "^0.4.4",
