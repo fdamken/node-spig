@@ -1,0 +1,7 @@
+{
+    "$import": true,
+    "roles": {
+        "admin": "LDAP_ADMIN"
+    }
+}
+

@@ -49,29 +49,21 @@ module.exports = function (grunt) {
                 }]
             }
         },
-        jslint: {
-            lib: {
-                src: ['<%= build.source.dir %>/<%= build.source.mask %>'],
-                directives: {
-                    node: true
-                },
-                options: {
-                    jslintXml: '<%= build.dir %>/jslint.xml'
-                }
+        jshint: {
+            options: {
+                mocha: true,
+                node: true
             },
+            lib: ['<%= build.source.dir %>/<%= build.source.mask %>'],
             test: {
-                src: ['<%= build.test.dir %>/<%= build.test.mask %>'],
-                directives: {
-                    node: true,
-                    predef: ['after', 'afterEach', 'before', 'beforeEach', 'describe', 'it', '__dirname']
+                files: {
+                    src: ['<%= build.test.dir %>/<%= build.test.mask %>']
+                },
+                options : {
+                    expr: true
                 }
             },
-            root: {
-                src: '*.js',
-                directives: {
-                    node : true
-                }
-            }
+            root: ['*.js']
         },
         mocha_istanbul: {
             coverage: {
@@ -107,14 +99,15 @@ module.exports = function (grunt) {
     // Load tasks.
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-jslint');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-mocha-istanbul');
 
     // Build tasks.
-    grunt.registerTask('verify', 'Verifies that the code matches the expected code quality.', ['jslint']);
+    grunt.registerTask('verify', 'Verifies that the code matches the expected code quality.', ['jshint']);
     grunt.registerTask('test', ['mocha_istanbul:coverage']);
 
     // Reactor tasks.
+    grunt.registerTask('qa', ['verify', 'test']);
     grunt.registerTask('build', ['clean', 'verify', 'test', 'copy']);
 
     // Default task.
