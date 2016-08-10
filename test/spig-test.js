@@ -76,7 +76,7 @@ describe('#error-cli', function () {
 
         config = require(MODULE);
         expect(config)
-            .to.be.null;
+            .to.be.an('object');
 
         console.error = consoleError;
 
@@ -101,7 +101,7 @@ describe('#error-cli', function () {
 
         config = require(MODULE);
         expect(config)
-            .to.be.null;
+            .to.be.an('object');
 
         console.error = consoleError;
 
