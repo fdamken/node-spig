@@ -1,6 +1,6 @@
 {
   "name": "spig",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SPIG is a simple and powerful configuration tool that simplifies the configuration of any NodeJS module.",
   "main": "./lib/",
   "scripts": {
