@@ -74,6 +74,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-mocha-istanbul');
+    grunt.loadNpmTasks('grunt-release');
 
     // Build tasks.
     grunt.registerTask('test', ['jshint', 'mocha_istanbul:coverage']);
