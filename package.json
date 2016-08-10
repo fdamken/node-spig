@@ -1,6 +1,6 @@
 {
   "name": "spig",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "SPIG is a simple and powerful configuration tool that simplifies the configuration of any NodeJS module.",
   "main": "./lib/",
   "scripts": {
@@ -32,7 +32,6 @@
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-mocha-istanbul": "^5.0.2",
-    "grunt-release": "^0.14.0",
     "istanbul": "^0.4.4",
     "mocha": "^3.0.2"
   }
