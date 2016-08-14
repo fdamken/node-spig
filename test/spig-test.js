@@ -16,29 +16,23 @@
  * limitations under the License.
  */
 
-// Variable declaration.
-var chai, decache, expect, MODULE, path, setupEach, teardownEach;
-
-
 // Constants.
-MODULE = '../lib/';
+var MODULE = '../lib/';
 // Modules.
-chai = require('chai');
-decache = require('decache');
-path = require('path');
+var chai = require('chai');
+var decache = require('decache');
+var path = require('path');
 // Submodules.
-expect = chai.expect;
+var expect = chai.expect;
 
-setupEach = function (subdir, cliParameters) {
-    /*jslint nomen: true */
+var setupEach = function (subdir, cliParameters) {
     process.chdir(path.join(__dirname, subdir));
-    /*jslint nomen: false */
 
     if (cliParameters) {
         process.argv = cliParameters;
     }
 };
-teardownEach = function () {
+var teardownEach = function () {
     decache(MODULE);
 
     process.argv = [];
@@ -46,7 +40,7 @@ teardownEach = function () {
 
 afterEach(teardownEach);
 
-describe('#error', function () {
+describe('#spig ##error', function () {
     it('should throw an error (configuration file does not exist)', function () {
         setupEach('error/empty');
 
@@ -59,22 +53,19 @@ describe('#error', function () {
         expect(require.bind(require, MODULE)).to.throw(/^Unable to read the configuration file located at: <.*no-such-file>/);
     });
 });
-describe('#error-cli', function () {
+describe('#spig ##error-cli', function () {
     it('should print an error (configuration file does not exist)', function () {
-        // Variable declarations.
-        var config, consoleError, errors;
-
         setupEach('error/empty', ['-snt']);
 
-        errors = [];
-        consoleError = console.error;
+        var errors = [];
+        var consoleError = console.error;
         console.error = function (msg) {
             consoleError.apply(console, arguments);
 
             errors.push(msg);
         };
 
-        config = require(MODULE);
+        var config = require(MODULE);
         expect(config)
             .to.be.an('object');
 
@@ -86,20 +77,17 @@ describe('#error-cli', function () {
             .to.match(/^Unable to read the configuration file located at: <.*config>/);
     });
     it('should print an error (configuration file does not exist) (long)', function () {
-        // Variable declarations.
-        var config, consoleError, errors;
-
         setupEach('error/empty', ['--spig-no-throw']);
 
-        errors = [];
-        consoleError = console.error;
+        var errors = [];
+        var consoleError = console.error;
         console.error = function (msg) {
             consoleError.apply(console, arguments);
 
             errors.push(msg);
         };
 
-        config = require(MODULE);
+        var config = require(MODULE);
         expect(config)
             .to.be.an('object');
 
@@ -112,20 +100,17 @@ describe('#error-cli', function () {
     });
 
     it('should print an error and return root configuration (imported file does not exist)', function () {
-        // Variable declarations.
-        var config, consoleError, errors;
-
         setupEach('error/invalid-import', ['-snt']);
 
-        errors = [];
-        consoleError = console.error;
+        var errors = [];
+        var consoleError = console.error;
         console.error = function (msg) {
             consoleError.apply(console, arguments);
 
             errors.push(msg);
         };
 
-        config = require(MODULE);
+        var config = require(MODULE);
         expect(config)
             .to.be.an('object');
         expect(config.key)
@@ -139,20 +124,17 @@ describe('#error-cli', function () {
             .to.match(/^Unable to read the configuration file located at: <.*no-such-file>/);
     });
     it('should print an error and return root configuration (imported file does not exist) (long)', function () {
-        // Variable declarations.
-        var config, consoleError, errors;
-
         setupEach('error/invalid-import', ['--spig-no-throw']);
 
-        errors = [];
-        consoleError = console.error;
+        var errors = [];
+        var consoleError = console.error;
         console.error = function (msg) {
             consoleError.apply(console, arguments);
 
             errors.push(msg);
         };
 
-        config = require(MODULE);
+        var config = require(MODULE);
         expect(config)
             .to.be.an('object');
         expect(config.key)
@@ -167,23 +149,19 @@ describe('#error-cli', function () {
     });
 });
 
-describe('#warn', function () {
+describe('#spig ##warn', function () {
     it('should print a warning', function () {
-        // Variable declaration.
-        var config, consoleWarn, warnings;
-
-
         setupEach('warn/unsupported-import-type');
 
-        warnings = [];
-        consoleWarn = console.warn;
+        var warnings = [];
+        var consoleWarn = console.warn;
         console.warn = function (msg) {
             consoleWarn.apply(console, arguments);
 
             warnings.push(msg);
         };
 
-        config = require(MODULE);
+        var config = require(MODULE);
         expect(config.roles).to.deep.equal({
             admin: 'LDAP_ADMIN'
         });
@@ -197,16 +175,9 @@ describe('#warn', function () {
     });
 });
 
-describe('#ok', function () {
-    // Variable declaration.
-    var execute;
-
-    execute = function () {
-        // Variable declaration.
-        var config;
-
-
-        config = require(MODULE);
+describe('#spig ##ok', function () {
+    var execute = function () {
+        var config = require(MODULE);
         expect(config.db).to.deep.equal({
             url: 'mysql://localhost/test-db',
             username: 'root',
@@ -281,28 +252,20 @@ describe('#ok', function () {
         execute();
     });
 });
-describe('#ok-cli', function () {
+describe('#spig ##ok-cli', function () {
     it('should load the alternate import configuration', function () {
-        // Variable declaration.
-        var config;
-
-
         setupEach('ok/alternate-import', ['-spi', '$load']);
 
-        config = require(MODULE);
+        var config = require(MODULE);
         expect(config)
             .to.be.an('object');
         expect(config.key)
             .to.equal('value');
     });
     it('should load the alternate import configuration (long)', function () {
-        // Variable declaration.
-        var config;
-
-
         setupEach('ok/alternate-import', ['--spig-prop-import', '$load']);
 
-        config = require(MODULE);
+        var config = require(MODULE);
         expect(config)
             .to.be.an('object');
         expect(config.key)
@@ -310,26 +273,18 @@ describe('#ok-cli', function () {
     });
 
     it('should load alternate configuration', function () {
-        // Variable declaration.
-        var config;
-
-
         setupEach('ok/alternate-config', ['-sc', 'properties']);
 
-        config = require(MODULE);
+        var config = require(MODULE);
         expect(config)
             .to.be.an('object');
         expect(config.key)
             .to.equal('value');
     });
     it('should load alternate configuration (long)', function () {
-        // Variable declaration.
-        var config;
-
-
         setupEach('ok/alternate-config', ['--spig-config', 'properties']);
 
-        config = require(MODULE);
+        var config = require(MODULE);
         expect(config)
             .to.be.an('object');
         expect(config.key)
