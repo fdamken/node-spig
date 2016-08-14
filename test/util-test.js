@@ -25,6 +25,51 @@ var expect = chai.expect;
 // Module under test.
 var util = require(MODULE);
 
+describe('#util ##error', function () {
+    it('should throw an error on getting as <obj> is not an <object>', function () {
+        expect(util.getPath.bind(util, null, '.db.url'))
+            .to.throw('AssertionError: Expected <obj> to be an <object>!');
+    });
+    it('should throw an error on getting as <objPath> is not a <string>', function () {
+        expect(util.getPath.bind(util, { }, null))
+            .to.throw('AssertionError: Expected <objPath> to be a <string>!');
+    });
+    it('should throw an error on getting as <objPath> does not start with a dot', function () {
+        expect(util.getPath.bind(util, { }, 'db.url'))
+            .to.throw('AssertionError: Expected <objPath> to start with <.>!');
+    });
+    it('should throw an error on getting <.db.url> as it does not exist', function () {
+        expect(util.getPath.bind(util, { }, '.db.url'))
+            .to.throw('Missing required parent property <db> of path <.db.url>!');
+    });
+
+    it('should throw an error on setting as <obj> is not an <object>', function () {
+        expect(util.setPath.bind(util, null, '.db.url'))
+            .to.throw('AssertionError: Expected <obj> to be an <object>!');
+    });
+    it('should throw an error on setting as <objPath> is not a <string>', function () {
+        expect(util.setPath.bind(util, { }, null, 'value'))
+            .to.throw('AssertionError: Expected <objPath> to be a <string>!');
+    });
+    it('should throw an error on setting as <objPath> does not start with a dot', function () {
+        expect(util.setPath.bind(util, { }, 'db.url', 'localhost'))
+            .to.throw('AssertionError: Expected <objPath> to start with <.>!');
+    });
+    it('should throw an error on getting <.db.url> as it does not exist', function () {
+        expect(util.setPath.bind(util, { }, '.db.url', 'localhost'))
+            .to.throw('Missing required parent property <db> of path <.db.url>!');
+    });
+
+    it('should throw an error on walking the object tree as <obj> is not an <object>', function () {
+        expect(util.walkObjectTree.bind(util, null, function() { }))
+            .to.throw('AssertionError: Expected <obj> to be an <object>!');
+    });
+    it('should throw an error on walking the object tree as <forEach> is not a <function>', function () {
+        expect(util.walkObjectTree.bind(util, { }, null))
+            .to.throw('AssertionError: Expected <forEach> to be a <function>!');
+    });
+});
+
 describe('#util ##ok', function () {
     it('should get the path <.db.options.auth.username>', function () {
         var actual = util.getPath({
@@ -181,50 +226,5 @@ describe('#util ##ok', function () {
                 '.messages.de.error': 'Ein Fehler ist aufgetreten!',
                 '.messages.en.error': 'An error occurred!'
             });
-    });
-});
-
-describe('#util ##error', function () {
-    it('should throw an error on getting as <obj> is not an <object>', function () {
-        expect(util.getPath.bind(util, null, '.db.url'))
-            .to.throw('AssertionError: Expected <obj> to be an <object>!');
-    });
-    it('should throw an error on getting as <objPath> is not a <string>', function () {
-        expect(util.getPath.bind(util, { }, null))
-            .to.throw('AssertionError: Expected <objPath> to be a <string>!');
-    });
-    it('should throw an error on getting as <objPath> does not start with a dot', function () {
-        expect(util.getPath.bind(util, { }, 'db.url'))
-            .to.throw('AssertionError: Expected <objPath> to start with <.>!');
-    });
-    it('should throw an error on getting <.db.url> as it does not exist', function () {
-        expect(util.getPath.bind(util, { }, '.db.url'))
-            .to.throw('Missing required parent property <db> of path <.db.url>!');
-    });
-
-    it('should throw an error on setting as <obj> is not an <object>', function () {
-        expect(util.setPath.bind(util, null, '.db.url'))
-            .to.throw('AssertionError: Expected <obj> to be an <object>!');
-    });
-    it('should throw an error on setting as <objPath> is not a <string>', function () {
-        expect(util.setPath.bind(util, { }, null, 'value'))
-            .to.throw('AssertionError: Expected <objPath> to be a <string>!');
-    });
-    it('should throw an error on setting as <objPath> does not start with a dot', function () {
-        expect(util.setPath.bind(util, { }, 'db.url', 'localhost'))
-            .to.throw('AssertionError: Expected <objPath> to start with <.>!');
-    });
-    it('should throw an error on getting <.db.url> as it does not exist', function () {
-        expect(util.setPath.bind(util, { }, '.db.url', 'localhost'))
-            .to.throw('Missing required parent property <db> of path <.db.url>!');
-    });
-
-    it('should throw an error on walking the object tree as <obj> is not an <object>', function () {
-        expect(util.walkObjectTree.bind(util, null, function() { }))
-            .to.throw('AssertionError: Expected <obj> to be an <object>!');
-    });
-    it('should throw an error on walking the object tree as <forEach> is not a <function>', function () {
-        expect(util.walkObjectTree.bind(util, { }, null))
-            .to.throw('AssertionError: Expected <forEach> to be a <function>!');
     });
 });
